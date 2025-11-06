@@ -1,19 +1,49 @@
 # cs5228_hdb_resale_price_prediction
 
-Overall, all preprocessing and feature engineering steps seem meaningful, including the creation of new location/distance-based features.
+## Task Description
 
-Probably not a big deal, but it is not obvious where the ranking for FLAT_TYPE comes from. For example, "executive" flats have 3-4 bedrooms, so it's not obvious why they have a higher rank than "5-room" flats.
+The resale market of HDB flats is big business in Singapore. To find a good prices as either a buyer or a seller, it is important to have good understanding of what affects the market value of a HDB flat. Most people would accept that attributes such as the size and type of flat, its floor, but also its location to nearby amenities (e.g., MRT stations, parks, malls, commercial centers) influence the resale price of the flat. However, it is not obvious which attributes are indeed most important in a quantified sense.
 
-General comment for the final report. You want to ensure that the plots are readable and have sufficient font size.
+The goal of this project is to predict the resale price of a HDB flat based on its properties (e.g., size, #rooms, type, model, location). It is therefore first and foremost a regression task. Besides to prediction outcome in terms of a dollar value, other useful results include the importance of different attributes, the evaluation and comparison of different regression techniques, an error analysis and discussion about limitations and potential extensions, etc.
 
-Slide 10: A correlation analysis is never a bad idea, but in your project you may want to add some discussion about what information you get out of this. This includes that this figure only shows a linear correlation, and why this might be some limitation.
+## Evaluation
 
-Slide 11: Similarly, it's not clear how you use the information about outliers. Are you removing them?
+The evaluation metric for this competition is Root Mean Squared Error (RSME). The RSME is a common metric to evaluate regression tasks. We use the RSME (instead of the Mean Squared Error) so that the error values have the correct unit, which is SGD for this task.
 
-Slide 12 (next steps)
+## Code Structure
 
-- Depending on your total number of models you may consider, you could limit hyperparameter tuning to only the most promising one. No need to tune a model that just performs poorly.
-- Apart from just bringing the RSME, you may also want to explore any other insights the data or the model(s) tell you. A good model is not just one that makes good predictions.
-- You may not have enough time to explore all possibilities – not worries, this is by design. So you may need to make informed decisions which directions could be more promising than others.
+This project trains and evaluates multiple regression models on a given dataset.
+It includes both classical linear models (Linear Regression, Lasso, Ridge) and modern ensemble and non-parametric methods (LightGBM, XGBoost, Random Forest, CatBoost, KNN, and Neural Networks).
 
-Lastly, as a general comment, always keep an eye on the deadline. You want to start early with your final report to avoid rushing it. After all, the final report is the main assessment component. There is no need to spend too much time just to squeeze out a slightly better ranking in Kaggle.
+The best-performing models for each approach are saved automatically in the best_models/ directory for later comparison and reuse.
+
+```graphql
+project/
+│
+├── dataset/                           # Dataset directory
+│   ├── original/                      # Original data files
+│   │   ├── train.csv
+│   │   └── test.csv
+│   │
+│   ├── auxiliary-data/                # Auxiliary or external supporting data
+│   │
+│   └── processed-data/                # Preprocessed data used for training
+│
+├── best_models/                       # Stores the best-performing models from each algorithm
+│
+├── eda.ipynb                          # Exploratory Data Analysis (EDA)
+│
+├── data_preprocessing.ipynb           # Data cleaning and feature engineering
+│
+├── regression_LGBM_XGB.ipynb          # Implements regression models:
+│                                      # Linear Regression, Lasso, Ridge, LightGBM, XGBoost
+│
+├── RandomForest_CatBoost.ipynb        # Implements Random Forest and CatBoost models
+│
+├── models_without_auxdata.ipynb       # Models without auxiliary data
+│
+├── KNN_NN.ipynb                       # Implements K-Nearest Neighbors (KNN) and Neural Network models
+│
+└── README.md                          # Project documentation
+
+```
