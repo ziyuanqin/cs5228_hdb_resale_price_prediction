@@ -42,7 +42,7 @@ project/
 │
 ├── models_without_auxdata.ipynb       # Models without auxiliary data
 │
-├── KNN_NN.ipynb                       # Implements K-Nearest Neighbors (KNN) and Neural Network models
+├── KNN_MLP.ipynb                       # Implements K-Nearest Neighbors (KNN) and Neural Network models
 │
 └── README.md                          # Project documentation
 
